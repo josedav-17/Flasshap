@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/Home.css') }}">
+    <title>Login</title>
+</head>
+
+<body>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="AlertaMensaje">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <div class="login">
+        <h1>Login</h1>
+        <form method="POST" action="/Home/">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <input type="text" name="User" placeholder="Username" required="required" />
+            <input type="password" name="Password" placeholder="Password" required="required" />
+            <button type="submit" class="btn btn-primary btn-block btn-large">Let me in.</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".AlertaMensaje").fadeOut(1000);
+            },3000);
+        });
+    </script>
+
+</body>
+
+</html>

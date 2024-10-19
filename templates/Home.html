@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/datos.css') }}">
+    <title>Home</title>
+</head>
+<body>
+    <h1 style="font-size:50px; text-align:center">BIENVENIDO A LA APP CREADA CON FLASK Usuario: {{Name}}</h1>
+
+    <form method="POST" action="/Logout/">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" class="btn btn-primary btn-block btn-large">LOGOUT.</button>
+    </form>
+
+    <h1>Base de Datos</h1>
+
+    <h2>Clientes</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+        </tr>
+        {% for cliente in datos['clientes'] %}
+        <tr>
+            <td>{{ cliente[0] }}</td>
+            <td>{{ cliente[1] }}</td>
+            <td>{{ cliente[2] }}</td>
+            <td>{{ cliente[3] }}</td>
+            <td>{{ cliente[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Sensores</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Ubicación</th>
+            <th>Tipo</th>
+            <th>Fecha Instalación</th>
+            <th>ID Cliente</th>
+        </tr>
+        {% for sensor in datos['sensores'] %}
+        <tr>
+            <td>{{ sensor[0] }}</td>
+            <td>{{ sensor[1] }}</td>
+            <td>{{ sensor[2] }}</td>
+            <td>{{ sensor[3] }}</td>
+            <td>{{ sensor[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Mediciones</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>ID Sensor</th>
+            <th>Fecha</th>
+            <th>Valor</th>
+        </tr>
+        {% for medicion in datos['mediciones'] %}
+        <tr>
+            <td>{{ medicion[0] }}</td>
+            <td>{{ medicion[1] }}</td>
+            <td>{{ medicion[2] }}</td>
+            <td>{{ medicion[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Reportes</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>ID Cliente</th>
+            <th>Fecha</th>
+            <th>Observaciones</th>
+        </tr>
+        {% for reporte in datos['reportes'] %}
+        <tr>
+            <td>{{ reporte[0] }}</td>
+            <td>{{ reporte[1] }}</td>
+            <td>{{ reporte[2] }}</td>
+            <td>{{ reporte[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+
+
+</body>
+</html>
